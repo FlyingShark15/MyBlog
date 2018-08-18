@@ -1,0 +1,56 @@
+    <div class="moreSelect" id="lp_right_select">
+      <script>
+window.onload = function ()
+{
+  var oLi = document.getElementById("tab").getElementsByTagName("li");
+  var oUl = document.getElementById("ms-main").getElementsByTagName("div");
+
+  for(var i = 0; i < oLi.length; i++)
+  {
+    oLi[i].index = i;
+    oLi[i].onmouseover = function ()
+    {
+      for(var n = 0; n < oLi.length; n++) oLi[n].className="";
+      this.className = "cur";
+      for(var n = 0; n < oUl.length; n++) oUl[n].style.display = "none";
+      oUl[this.index].style.display = "block"
+    }
+  }
+}
+</script>
+      <div class="ms-top">
+        <ul class="hd" id="tab">
+          <li class="cur"><a href="/">浏览排行</a></li>
+          <li><a href="/">评论排行</a></li>
+          <li><a href="/">站长推荐</a></li>
+        </ul>
+      </div>
+      <div class="ms-main" id="ms-main">
+      <!--浏览排行-->
+        <div style="display: block;" class="bd bd-news" >
+          <ul>
+              {% for article in article_click_list %}
+            <li><a href="{% url 'article' %}?id={{ article.id }}" target="_blank">{{ article }}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+        <!--评论排行-->
+        <div  class="bd bd-news">
+          <ul>
+              {% for article in article_comment_list %}
+            <li><a href="{% url 'article' %}?id={{ article.id }}" target="_blank">{{ article.title }}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+      <!--站长推荐-->
+        <div class="bd bd-news">
+          <ul>
+              {% for article in article_is_recommend_list %}
+            <li><a href="{% url 'article' %}?id={{ article.id }}" target="_blank">{{ article }}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <!--ms-main end -->
+    </div>
+    <!--切换卡 moreSelect end -->

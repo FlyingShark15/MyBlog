@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block left_content %}
+
+    <div class="title">
+        <h2>{{ article.title }}</h2>
+        <div class="postmeta">
+          <span class="postmeta_author">{{ article.user.username }}</span>
+          <span class="postmeta_category"><a href="" rel="category">{{ article.category.name }}</a></span>
+          <span class="postmeta_time">{{ article.date_publish | date:'Y-m-d' }}</span>
+        </div>
+    </div>
+
+        <div class="entry">
+          {{ article.content | safe }}  <!--safe显示内容，否则显示转义后的代码，确保安全-->
+        </div>
+
+        <span class="tags">
+            {% for tag in article.tag.all %}
+            <a href="?tag={{ tag.name }}" rel="tag">{{ tag.name }}</a>
+            {% endfor %}
+        </span>
+
+        <div class="info">
+        本文网址:  <a href="{{ SITE_URL }}article/?id={{ article.id }}" rel="bookmark" title="{{ article.title }}">{{ SITE_URL }}article/?id={{ article.id }}</a>
+        </div>
+<!--评论-->
+{% endblock %}

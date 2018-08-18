@@ -1,0 +1,9 @@
+{% load staticfiles %}
+<div class="links">
+      <h3>友情链接</h3>
+      <ul>
+          {% for link in link_list %}
+              <li><a href="{{ link.callback_url }}">{{ link.title }}</a></li>
+          {%  endfor %}
+      </ul>
+    </div>
